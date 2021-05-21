@@ -10,7 +10,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed": "node ./src/seed-app.js"
   },
   "repository": {
     "type": "git",

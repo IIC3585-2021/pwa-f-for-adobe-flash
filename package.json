@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "firebase-admin": "^9.8.0",
+    "firestore-sequelizer": "^0.2.5"
+  },
+  "name": "pwa-f-for-adobe-flash",
+  "description": "Repositorio del grupo 6 para la tarea 4 del ramo Diseño avanzado de aplicaciones web.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IIC3585-2021/pwa-f-for-adobe-flash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IIC3585-2021/pwa-f-for-adobe-flash/issues"
+  },
+  "homepage": "https://github.com/IIC3585-2021/pwa-f-for-adobe-flash#readme",
+  "devDependencies": {},
+  "keywords": []
+}

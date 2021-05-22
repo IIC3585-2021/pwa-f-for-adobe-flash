@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "firebase-admin": "^9.8.0",
@@ -23,6 +24,5 @@
     "url": "https://github.com/IIC3585-2021/pwa-f-for-adobe-flash/issues"
   },
   "homepage": "https://github.com/IIC3585-2021/pwa-f-for-adobe-flash#readme",
-  "devDependencies": {},
   "keywords": []
 }

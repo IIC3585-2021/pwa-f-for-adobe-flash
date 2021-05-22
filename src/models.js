@@ -14,12 +14,13 @@ const Chat = defineModel("chat", {
 });
 
 const Contact = defineModel("contact", {
-    userId: "",
+    setterUserId: "",
+    getterUserId: "",
     name: "",
 });
 
 const User = defineModel("users", {
     name: "",
-}, {subcollections: [Message, Chat, Contact]});
+});
 
 module.exports = {User, Contact, Chat, Message};

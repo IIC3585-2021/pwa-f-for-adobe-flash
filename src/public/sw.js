@@ -1,7 +1,7 @@
 const cacheName = 'PWA';
 const toCache = [
   './',
-  './views/index.ejs',
+  '../views/index.ejs',
   './manifest.json'
 ];
 

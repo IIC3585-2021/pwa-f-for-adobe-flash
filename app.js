@@ -18,7 +18,7 @@ let defaultUser;
 const app = express()
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "views"));
+app.set('views', path.join(__dirname, "src", "views"));
 
 app.get('/', async function(req, res, next) {
   const userChats = await Chat.findAll({where:[{userId1: defaultUser.id},{userId2: defaultUser.id}]})

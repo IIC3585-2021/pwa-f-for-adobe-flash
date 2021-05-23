@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser')
 const admin = require("firebase-admin");
 const firebaseSequelizer = require("firestore-sequelizer");
 const serviceAccount = require("./t4-web-avanzado-firebase-adminsdk-mquh4-4d6254cd6a.json");
@@ -17,8 +18,25 @@ let defaultUser;
 
 const app = express()
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "src", "views"));
+app.set('views', path.join(__dirname, "src", "public"));
+
+app.get('/sw.js', function(req,res,next) {
+  res.sendFile(path.join(__dirname + '/src/public/sw.js'))
+})
+
+app.get('/manifest.json', function(req,res,next) {
+  res.sendFile(path.join(__dirname + '/src/public/manifest.json'))
+})
+
+app.get('/icon', function(req,res,next) {
+  res.sendFile(path.join(__dirname + '/src/public/img/icons/icon-72x72.png'))
+})
 
 app.get('/', async function(req, res, next) {
   const userChats = await Chat.findAll({where:[{userId1: defaultUser.id},{userId2: defaultUser.id}]})

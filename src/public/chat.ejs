@@ -3,8 +3,8 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <meta name="theme-color" content="#222831">
   <head profile="http://www.w3.org/2005/10/profile">
-  <link rel="icon" type="image/png" href="./icon"/>
-  <link rel='manifest' href='./manifest.json'>
+  <link rel="icon" type="image/png" href="/icon"/>
+  <link rel='manifest' href='/manifest.json'>
   <style>
 body {
   margin: 0 auto;
@@ -54,29 +54,32 @@ body {
   float: left;
   color: #999;
 }
-.buttonLetter{
-    font-size: 100%;
-    width: 80%; /* or whatever width */
-    height: 20px;
-    margin: 2%;
-}
-
-.buttonTeal:hover {
-  background-color: #08bfbf;
-}
-
 </style>
 </head>
-<body>  
+<body>
   <script>
     window.vapidPublicKey = "<%= vp %>";
   </script>
-  <% chats.forEach((chat) => { %>
-    <div class="container">
-      <h3 class="buttonLetter"><a class="buttonTeal" href="/chat/<%-chat.id%>"><%- chat.id %></a></h3>
-    </div>
-  <% }) %>
 
-  <script src="scripts/main.js"></script>
+<% messages.forEach((message) => { %>
+<% if(message.userId === defaultUser.id) { %>
+  <div class="container">
+    <p><%- message.content %></p>
+    </div>
+<% } else{ %>
+  <div class="container darker">
+    <p><%- message.content %></p>
+    </div>
+<% } %>
+
+<% }) %>
+
+
+<form action="/message/create" method="post">
+  <label for="fname">Tu mensaje:</label>
+  <input type="text" id="content" name="content">
+  <input type="hidden" id="chatId" name="chatId" value="<%- chatId %>">
+  <input type="submit" value="Enviar">
+</form>
 
 </body>

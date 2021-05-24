@@ -64,6 +64,9 @@ app.get('/sw.js', function(req,res,next) {
 
 app.use('/scripts', express.static(__dirname + '/src/public/scripts'));
 
+app.use(express.static(__dirname + 'src/public'));
+
+
 app.get('/serviceAccount', function(req,res,next) {
   res.sendFile(path.join(__dirname + '/t4-web-avanzado-firebase-adminsdk-mquh4-4d6254cd6a.json'))
 })
@@ -77,22 +80,32 @@ app.get('/icon', function(req,res,next) {
 })
 
 app.get('/', async function(req, res, next) {
-  const userChats = await Chat.findAll({where:[{userId1: defaultUser.id},{userId2: defaultUser.id}]})
+  const userChats = await Chat.findAll({where:{userId1: defaultUser.id}})
+  const userChats2 = await Chat.findAll({where:{userId2: defaultUser.id}})
+  userChats.push(...userChats2)
   res.render('index.ejs', {user: defaultUser, chats: userChats})
 })
 
 app.get('/chat/:id', async function(req, res, next) {
-  const messages = (await Message.findAll({where: {chatId: req.params.id}}))
+  const chatId =  req.params.id
+  const chat = await Chat.findOne({where: {id: chatId}})
+  const user2Id = chat.userId1 === defaultUser.id ? chat.userId2 : chat.userId1
+  const user2 = await User.findOne({where: {id: user2Id}})
+  const messages = (await Message.findAll({where: {chatId}}))
     .map(message => message.data);
-  res.render('chat.ejs', messages)
+  
+  res.render('chat.ejs', {defaultUser, messages, chatId, user2})
 })
 
 app.post('/message/create', async function(req, res, next) {
   const {content, chatId} = req.body
-  const message = {content, chatId, createdAt: new Date()};
+  const chat = await Chat.findOne({where: {id: chatId}})
+  const user2Id = chat.userId1 === defaultUser.id ? chat.userId2 : chat.userId1
+  const user2 = await User.findOne({where: {id: user2Id}})
+  const message = {content, chatId, userId: defaultUser.id, createdAt: new Date()};
   await Message.create(message)
   const messages = (await Message.findAll()).map(message => message.data);
-  res.render('chat.ejs', messages)
+  res.render('chat.ejs', {defaultUser, messages, chatId, user2})
 })
 
 const subscribers = []

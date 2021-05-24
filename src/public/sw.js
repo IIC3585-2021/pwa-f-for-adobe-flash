@@ -4,8 +4,8 @@ importScripts("https://www.gstatic.com/firebasejs/8.6.2/firebase-messaging.js");
 const cacheName = 'PWA';
 const toCache = [
   '/',
-  '/index.ejs',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon'
 ];
 
 const firebaseConfig = {
@@ -39,9 +39,10 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName)
     .then(cache => {
+      console.log("Service worker instalado")
       // Our application only has two files here index.html and manifest.json
       // but you can add more such as style.css as your app grows
-      return cache.addAll(toCache);
+      cache.addAll(toCache);
     })
     .catch(e => {
       console.log(e)
@@ -67,6 +68,11 @@ self.addEventListener('activate', function (event) {
 // and check if we have cached the file
 // if so it will serve the cached file
 self.addEventListener('fetch', event => {
+  // event.respondWith(
+  //   caches.match(event.request).then(cacheRes => {
+  //     return cacheRes || fetch(event.request);
+  //   })
+  // );
   event.respondWith(
     caches.open(cacheName)
       .then(cache => cache.match(event.request, { ignoreSearch: true }))

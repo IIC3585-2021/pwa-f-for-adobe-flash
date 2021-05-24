@@ -2,25 +2,24 @@
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js', { scope: './' })
     .then(function (registration) {
-        console.log('hola')
         //console.log(registration.pushManager.subscribe({userVisibleOnly: true}))
-        registration.pushManager.subscribe(
-            //---always show notification when received---
-            {
-                userVisibleOnly: true,
-                // applicationServerKey: urlB64ToUint8Array(window.vapidPublicKey)
-                applicationServerKey: window.vapidPublicKey
-            }
-        )
-            .then(function (subscription) {
-                console.log(subscription);
-                console.log(subscription.toJSON())
-                console.log('Push notification subscribed.');
-                sendSubscriptionIDToServer(subscription);
-            })
-            .catch(function (error) {
-                console.error('Push notification subscription error: ', error);
-            });
+        // registration.pushManager.subscribe(
+        //     //---always show notification when received---
+        //     {
+        //         userVisibleOnly: true,
+        //         // applicationServerKey: urlB64ToUint8Array(window.vapidPublicKey)
+        //         applicationServerKey: window.vapidPublicKey
+        //     }
+        // )
+            // .then(function (subscription) {
+            //     console.log(subscription);
+            //     console.log(subscription.toJSON())
+            //     console.log('Push notification subscribed.');
+            //     sendSubscriptionIDToServer(subscription);
+            // })
+            // .catch(function (error) {
+            //     console.error('Push notification subscription error: ', error);
+            // });
     });
 }
 //---check if push notification permission has been denied by the user---

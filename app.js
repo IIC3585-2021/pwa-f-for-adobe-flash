@@ -26,30 +26,28 @@ const app = express()
 
 const FCM = require('fcm-node');
 
-const serverKey = 'AAAAz3bOd4Y:APA91bG7TlOlM7Xo4zykSJa8pVMyASTyTP2_gL-DQ3uR5jq6v3MYsG_inLqaiTLMJIcFiL0ViiBgH1A3W3nC2m3iWcLEx18aU1AWaboaETxYopUF2QqfHZ3XEBZJpks_uJ8eci-Ff1iE';
+const serverKey = 'AAAAePauiRA:APA91bHmS4Xx1poLvBaj_WZq6Lwojo5O0i3P47vfXN4O8LaKsrm9Xk_719tjMRBdvWInd4fGl1nhzPl9n8FTsKyDqSBSF1SLaYSRLx1R9WB8hrUYQqism9WgQkneraTH6XeEj0g3kTvJ'
 
 const fcm = new FCM(serverKey);
 
-app.locals.vp = vapidKeys.publicKey;
+app.locals.vp = "BKX-TzuIC3ZtJPMBGn4Ok-l3a9FBRjnCQBcGZvOwbukjtp6bZpF8K8vPX2K8bktmvys08iH1-q8_bpsaAwDYOko";
 
 app.get('/push', function(req, res) {
+  subscribers.forEach((subscriber, index) => {
+    console.log("ID subscriber " + index + ": " + subscriber)
     let message = {
-        // for multiple recipients
-        to: subscribers[0]
-        // for single recipient
-        // to: subscribers[0]
+      to: subscriber
     };
     fcm.send(message, function(err, response){
-        if (err) {
-          console.log(message.to)
-            console.log("Something has gone wrong!");
-            console.log(err)
-         } else {
-                console.log("Successfully sent with response: ",
-                response);
-            }
+      if (err) {
+        console.log("Something has gone wrong!");
+        console.log(err)
+      } else {
+        console.log("Successfully sent with response: ", response);
+      }
     });
     res.sendStatus(200)
+  })
 });
 
 // parse application/x-www-form-urlencoded
@@ -62,10 +60,6 @@ app.set('views', path.join(__dirname, "src", "public"));
 
 app.get('/sw.js', function(req,res,next) {
   res.sendFile(path.join(__dirname + '/src/public/sw.js'))
-})
-
-app.get('/scripts/sw.js', function(req,res,next) {
-  res.sendFile(path.join(__dirname + '/src/public/scripts/sw.js'))
 })
 
 app.use('/scripts', express.static(__dirname + '/src/public/scripts'));
@@ -104,16 +98,16 @@ app.post('/message/create', async function(req, res, next) {
 const subscribers = []
 
 app.post('/subscribers/', function(req, res) {
-    //---check that the regid field is there---
-    if (!req.body.hasOwnProperty('subscriptionid')){
-        res.statusCode = 400;
-        res.send('Error 400: Post syntax incorrect.');
-        return;
-    }
-    //console.log(req.body.subscriptionid);
-    subscribers.push(req.body.subscriptionid)
-    res.statusCode = 200;
-    res.send('SubscriptionID received');
+  //---check that the regid field is there---
+  if (!req.body.hasOwnProperty('subscriptionid')){
+    res.statusCode = 400;
+    res.send('Error 400: Post syntax incorrect.');
+    return;
+  }
+  //console.log(req.body.subscriptionid);
+  subscribers.push(req.body.subscriptionid)
+  res.statusCode = 200;
+  res.send('SubscriptionID received');
 });
 
 app.listen(httpPort, async function () {

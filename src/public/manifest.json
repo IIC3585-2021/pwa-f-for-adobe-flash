@@ -1,10 +1,8 @@
 {
   "name": "PWA",
   "short_name": "PWA",
-    "splash_pages": null,
-
-    "gcm_sender_id": "891051472774",
-    
+  "splash_pages": null,
+  "gcm_sender_id": "519534709008",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFE9D2",

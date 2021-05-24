@@ -1,25 +1,29 @@
 // Registering our Service worker
 if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js', { scope: './' })
-  .then(function (registration) {
-    console.log('hola')
-    //console.log(registration.pushManager.subscribe({userVisibleOnly: true}))
-    registration.pushManager.subscribe(
-        //---always show notification when received---
-        { userVisibleOnly: true,
-            applicationServerKey: urlB64ToUint8Array(window.vapidPublicKey)}
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+    .then(function (registration) {
+        console.log('hola')
+        //console.log(registration.pushManager.subscribe({userVisibleOnly: true}))
+        registration.pushManager.subscribe(
+            //---always show notification when received---
+            {
+                userVisibleOnly: true,
+                // applicationServerKey: urlB64ToUint8Array(window.vapidPublicKey)
+                applicationServerKey: window.vapidPublicKey
+            }
         )
-        .then(function (subscription) {
-            console.log(subscription);
-            console.log('Push notification subscribed.');
-            sendSubscriptionIDToServer(subscription);
-        })
-        .catch(function (error) {
-            console.error('Push notification subscription error: ', error);
-        });
-});
+            .then(function (subscription) {
+                console.log(subscription);
+                console.log(subscription.toJSON())
+                console.log('Push notification subscribed.');
+                sendSubscriptionIDToServer(subscription);
+            })
+            .catch(function (error) {
+                console.error('Push notification subscription error: ', error);
+            });
+    });
 }
-    //---check if push notification permission has been denied by the user---
+//---check if push notification permission has been denied by the user---
 if (Notification.permission === 'denied') {
     alert('User has blocked push notification.');    }
 //---check if push notification is supported or not---
@@ -62,22 +66,22 @@ function subscribeToPushNotification() {
             //------add the following statement------
             sendSubscriptionIDToServer(subscription);
            //---------------------------------------
-           updatePushNotificationStatus(true);
+            updatePushNotificationStatus(true);
         })
         .catch(function (error) {
             updatePushNotificationStatus(false);
             console.error('Push notification subscription error: ', error);
-         });
+        });
     })
 }
 
 const urlB64ToUint8Array = base64String => {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
-  const rawData = atob(base64)
-  const outputArray = new Uint8Array(rawData.length)
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i)
-  }
-  return outputArray
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i)
+    }
+    return outputArray
 }

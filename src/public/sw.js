@@ -8,19 +8,19 @@ const toCache = [
   '/manifest.json'
 ];
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCdF7ItlIDSTLmoiyNL-e-WtlU_SYHizGQ",
-    authDomain: "test-feli.firebaseapp.com",
-    projectId: "test-feli",
-    storageBucket: "test-feli.appspot.com",
-    messagingSenderId: "891051472774",
-    appId: "1:891051472774:web:dbe65b09045ac3be0a5e07",
-    measurementId: "G-LNZ2MJVQJS"
-  };
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDjF40ml94lMyxLF6i8kAsSCT7frhMcWOQ",
+//   authDomain: "t4-web-avanzado.firebaseapp.com",
+//   projectId: "t4-web-avanzado",
+//   storageBucket: "t4-web-avanzado.appspot.com",
+//   messagingSenderId: "519534709008",
+//   appId: "1:519534709008:web:85871f6475f99a4cb53d95",
+//   measurementId: "G-Y9Y4WCXBF3"
+// }
 
 // API push: Cuando firebase manda notificación
 self.addEventListener("push", function (event) {
-    /* Acá se podría hacer una consulta al backend con los detalles de 
+    /* Acá se podría hacer una consulta al backend con los detalles de
     la notificación */
     console.info("Event: Push");
     let title = "Bienvenido!";
@@ -74,15 +74,4 @@ self.addEventListener('fetch', event => {
         return response || fetch(event.request);
       })
   );
-});
-
-self.addEventListener('push', function(event) {
-    console.info('Event: Push');
-    var title = 'Breaking News';
-    var body = {
-        'body': 'Click to see the latest breaking news', 'tag': 'pwa',
-        'icon': '../img/icons/icon-72x72.png'
-    };
-    event.waitUntil(self.registration.showNotification(title, body)
-    );
 });

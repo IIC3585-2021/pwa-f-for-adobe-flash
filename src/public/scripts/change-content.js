@@ -53,3 +53,4 @@ db.collection('chat').get().then((snapshot)=>{
         renderDiv(doc)
     });
 })
+

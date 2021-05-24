@@ -5,16 +5,19 @@
   <head profile="http://www.w3.org/2005/10/profile">
   <link rel="icon" type="image/png" href="./icon"/>
   <link rel='manifest' href='./manifest.json'>
-
-  <script>
-    // Registering our Service worker
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js', { scope: './' })
-    }
-  </script>
 </head>
 <body>
     <span>This example is for the article of progressive web apps written for LogRocket</span>
     <br>
     <span>You are now</span> <span><b class="page-status">online</b></span>
+    <span>Tap to enable/disable Push Notification</span>
+
+    <script>
+window.vapidPublicKey = "<%= vp %>";
+</script>
+
+    <script src="scripts/main.js"></script>
+
 </body>
+
+  

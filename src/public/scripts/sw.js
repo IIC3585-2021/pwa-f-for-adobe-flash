@@ -8,16 +8,6 @@ const toCache = [
   '/manifest.json'
 ];
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCdF7ItlIDSTLmoiyNL-e-WtlU_SYHizGQ",
-    authDomain: "test-feli.firebaseapp.com",
-    projectId: "test-feli",
-    storageBucket: "test-feli.appspot.com",
-    messagingSenderId: "891051472774",
-    appId: "1:891051472774:web:dbe65b09045ac3be0a5e07",
-    measurementId: "G-LNZ2MJVQJS"
-  };
-
 // API push: Cuando firebase manda notificación
 self.addEventListener("push", function (event) {
     /* Acá se podría hacer una consulta al backend con los detalles de 

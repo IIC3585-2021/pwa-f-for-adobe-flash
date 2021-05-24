@@ -4,8 +4,10 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "fcm-node": "^1.6.1",
     "firebase-admin": "^9.8.0",
-    "firestore-sequelizer": "^0.2.5"
+    "firestore-sequelizer": "^0.2.5",
+    "web-push": "^3.4.4"
   },
   "name": "pwa-f-for-adobe-flash",
   "description": "Repositorio del grupo 6 para la tarea 4 del ramo Diseño avanzado de aplicaciones web.",

@@ -67,16 +67,17 @@ body {
 
 </style>
 </head>
-<body>  
-  <script>
-    window.vapidPublicKey = "<%= vp %>";
-  </script>
-  <% chats.forEach((chat) => { %>
-    <div class="container">
-      <h3 class="buttonLetter"><a class="buttonTeal" href="/chat/<%-chat.id%>"><%- chat.id %></a></h3>
-    </div>
-  <% }) %>
+<body>
 
+  <h1>hola mundo</h1>
+
+  <ul id="chat-list"></ul>
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/change-content.js"></script>
+
 
 </body>

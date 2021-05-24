@@ -8,15 +8,15 @@ const toCache = [
   '/manifest.json'
 ];
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDjF40ml94lMyxLF6i8kAsSCT7frhMcWOQ",
-//   authDomain: "t4-web-avanzado.firebaseapp.com",
-//   projectId: "t4-web-avanzado",
-//   storageBucket: "t4-web-avanzado.appspot.com",
-//   messagingSenderId: "519534709008",
-//   appId: "1:519534709008:web:85871f6475f99a4cb53d95",
-//   measurementId: "G-Y9Y4WCXBF3"
-// }
+const firebaseConfig = {
+  apiKey: "AIzaSyDZjf72IPar7wmZ-ff3_2b0RK32x1-7Mvw",
+  authDomain: "pwa-f-for-adobe-flash.firebaseapp.com",
+  projectId: "pwa-f-for-adobe-flash",
+  storageBucket: "pwa-f-for-adobe-flash.appspot.com",
+  messagingSenderId: "814318270480",
+  appId: "1:814318270480:web:88ec52886ee297e98b3295",
+  measurementId: "G-K7407ZFNEM"
+};
 
 // API push: Cuando firebase manda notificación
 self.addEventListener("push", function (event) {

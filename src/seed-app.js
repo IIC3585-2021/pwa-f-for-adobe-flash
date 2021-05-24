@@ -10,8 +10,23 @@ admin.initializeApp({
 firebaseSequelizer.initializeApp(admin);
 
 up = async () => {
-  await User.create({name: "diegoheg"})
-  await User.create({name: "OKhan"})
+  const user1 = await User.create({name: "diegoheg"})
+  const user2 = await User.create({name: "Okhan"})
+  const chat = await Chat.create({userId1: user1.id, userId2: user2.id})
+  const message1 = await Message.create(
+    {
+      chatId: chat.id,
+      content: "Hola1",
+      userId: user1.id,
+      createdAt: new Date(2021, 04, 23, 0, 0, 12),
+    })
+  const message2 = await Message.create(
+    {
+      chatId: chat.id,
+      content: "Hola2",
+      userId: user2.id,
+      createdAt: new Date(2021, 04, 23, 0, 5, 12),
+    })
 };
 
 up();

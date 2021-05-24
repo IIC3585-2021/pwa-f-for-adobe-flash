@@ -3,6 +3,7 @@ const {defineModel} = require("firestore-sequelizer");
 const Message = defineModel("message", {
     content: "",
     chatId: "",
+    userId: "",
     createdAt: {
       type: "date",
     },

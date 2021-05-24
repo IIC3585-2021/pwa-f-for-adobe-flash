@@ -26,7 +26,7 @@ const app = express()
 
 const FCM = require('fcm-node');
 
-const serverKey = 'AAAAePauiRA:APA91bHmS4Xx1poLvBaj_WZq6Lwojo5O0i3P47vfXN4O8LaKsrm9Xk_719tjMRBdvWInd4fGl1nhzPl9n8FTsKyDqSBSF1SLaYSRLx1R9WB8hrUYQqism9WgQkneraTH6XeEj0g3kTvJ'
+const serverKey = 'AAAAvZkmuBA:APA91bFrwBFhXdMBGkR6z5zLfaQ0xvjVNMluC6lBhTYc1i3OUtN2Tinjeu-5uzTLxvwkdMJjv1dXIkb2MffsJhcWg1L7SLm0y0T4HNTLq3fz1Jg6NesMNSFqDwgS2_hStZfkAPS-Chyx'
 
 const fcm = new FCM(serverKey);
 
